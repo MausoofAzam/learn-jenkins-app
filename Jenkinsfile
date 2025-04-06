@@ -16,9 +16,16 @@ pipeline {
                 npm --version
                 npm ci
                 npm run build
-                
+
             '''
            }
+        }
+        stage('Test'){
+            steps{
+                '''
+                test -f build/index.html && echo "index.html found" && npm test || (echo "index.html not found and exit 1")
+                '''
+            }
         }
     }
 }
